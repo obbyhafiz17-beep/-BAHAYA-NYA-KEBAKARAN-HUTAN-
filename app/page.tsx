@@ -524,7 +524,9 @@ export default function HomePage() {
 
   useEffect(() => {
     const stored = window.localStorage.getItem('karhutla-best-score');
-    if (stored !== null) setBestScore(Number(stored));
+    if (stored === null) return;
+    const timer = window.setTimeout(() => setBestScore(Number(stored)), 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
